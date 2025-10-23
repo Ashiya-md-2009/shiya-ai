@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ASHIYA-AI</title>
+  
+  <meta name="description" content="Kyrexi Chatbot is your AI assistant for planning events, improving skills, finding the latest news, and writing code. Get answers quickly and accurately!" />
+  <meta property="og:title" content="SULA" />
+  <meta property="og:description" content="sula aii is designed to help you with everything from event planning to finding the latest web development news, offering personalized assistance for various tasks." />
+  <meta property="og:image" content="https://files.catbox.moe/r2qze5.png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kyrexi" />
+  <meta name="twitter:description" content="Get quick help with planning, public speaking, web news, and coding tasks using SULA." />
+  <meta name="twitter:image" content="https://i.ibb.co/v4HbGG2C/SulaMd.jpg" />
+
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" />
+
+  <style>
+    :root{
+      --bg: #0f1113;
+      --card: #141617;
+      --light-shadow: rgba(255,255,255,0.03);
+      --dark-shadow: rgba(0,0,0,0.7);
+      --accent: #4da6ff;
+      --muted: #9aa3ad;
+      --radius: 14px;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing:border-box;
+    }
+  
+    body{
+      font-family: 'Roboto', sans-serif;
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: radial-gradient(circle at 10% 10%, rgba(77,166,255,0.03), transparent 8%),
+                  var(--bg);
+     animation: bgMove 12s infinite alternate;    
+    }
+
+ @keyframes bgMove {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+  }
+    
+    .container{
+       width: 90%;
+       padding: 40px;
+       border-radius:22px;
+       background: rgba(20, 22, 23, 0.65); /* semi-transparent dark */
+       backdrop-filter: blur(12px); /* glassy blur effect */
+       box-shadow:
+       10px 10px 25px rgba(0, 0, 0, 0.8),
+       -10px -10px 25px rgba(255, 255, 255, 0.03);
+      color:#e6eef8;
+      border: 1px solid rgba(255,255,255,0.05);
+      animation: fadeIn 1.2s ease;
+   }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+    .title{
+      text-align:center;
+      color: #65FF00;
+      font-size:26px;
+      font-weight:600;
+      margin-bottom:12px;
+      text-shadow: 0 0 10px #65FF00;
+      animation: flicker 3s infinite;
+    }
+
+    @keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+    20%, 24%, 55% { opacity: 0.4; }
+  }
+  
+    .avatar{
+      width:92px;
+      height:92px;
+      border-radius:50%;
+      margin:0 auto 18px;
+      display:block;
+      background:linear-gradient(180deg,#0c0d0e,#212425);
+      box-shadow: inset  6px 6px 12px rgba(0,0,0,0.8),  
+                 inset -6px -6px 12px rgba(255,255,255,0.02);
+      overflow:hidden;
+      transition: .5s;
+    }
+  
+  .avatar:hover {
+     transform: rotate(10deg);
+     box-shadow: 0 0 10px #65FF00;             
+   }
+  
+    .avatar img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;      
+    }
+
+  
+    .tabs {
+      display:flex;
+      gap:8px;
+      margin-bottom:18px;
+      justify-content:center;
+    }
+  
+    .tab{
+      padding:8px 16px;
+      border-radius:12px;
+      background:transparent;
+      color:var(--muted);
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+    }
+  
+    .tab.active{
+      background:linear-gradient(180deg, rgba(77,166,255,0.06), rgba(77,166,255,0.02));
+      color: #65FF00;
+      box-shadow: 6px 6px 12px rgba(0,0,0,0.6), 
+                 -6px -6px 12px rgba(255,255,255,0.02);
+    }
+
+    .field{
+      margin-bottom:14px;
+    }
+  
+    input[type="text"], input[type="email"], input[type="password"]{
+      width: 100%;
+      padding: 12px 14px;
+      border-radius:12px;
+      border:none;
+      background: linear-gradient(180deg,#121314,#1b1c1d);
+      color: #65FF00;
+      font-weight: 500;
+      outline:none;
+      box-shadow: inset 5px 5px 10px rgba(0,0,0,0.7), inset -5px -5px 10px rgba(255,255,255,0.01);
+      font-size:14px;
+    }
+  
+    input::placeholder{color: #6f7780;}
+
+    .btn-primary{
+      width:100%;
+      padding:12px;
+      border-radius:12px;
+      border:none;
+      cursor:pointer;
+      font-weight:700;
+      background: linear-gradient(180deg, rgba(77,166,255,0.12), rgba(77,166,255,0.06));
+      color: #65FF00;
+      box-shadow: 6px 6px 12px rgba(0,0,0,0.6), -6px -6px 12px rgba(255,255,255,0.02);
+    }
+    .btn-primary:active{
+      box-shadow: inset 4px 4px 8px rgba(0,0,0,0.7), inset -4px -4px 8px rgba(255,255,255,0.02);
+    }
+
+    .btn-google{
+      margin-top:10px;
+      width:100%;
+      padding:10px;
+      border-radius:12px;border:none;cursor:pointer;
+      background: linear-gradient(180deg,#111213,#1f2021);
+      color:#cfe9ff;font-weight:600;
+      box-shadow: 4px 4px 10px rgba(0,0,0,0.6), -4px -4px 8px rgba(255,255,255,0.02);
+    }
+
+    .meta{
+      margin-top:12px;text-align:center;font-size:13px;color:var(--muted);
+    }
+
+    .error{color:#ff8a80;margin-top:8px;font-size:13px;text-align:center}
+
+    label.remember{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}
+
+    @media (max-width:420px){
+      .container{width:92%;padding:28px}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" role="main">
+    <div class="avatar" aria-hidden="true">
+      <img src="https://files.catbox.moe/4jg2v7.jpg" alt="Ai logo">
+    </div>
+
+    <div class="title">ASHIYA AI</div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" id="tab-login" data-mode="login">Login</button>
+      <button class="tab" id="tab-register" data-mode="register">Register</button>
+    </div>
+
+    <div id="form-area">
+      <!-- Dynamic form rendered by JS -->
+    </div>
+
+    <div style="margin-top:12px">
+      <button id="googleBtn" class="btn-google">Continue with Google</button>
+    </div>
+
+    <div class="error" id="errorMsg" aria-live="polite"></div>
+
+    <div class="meta">By continuing you agree to terms. Passwords are never logged.</div>
+  </div>
+
+  <!-- Firebase (compat) - load only once and consistent version -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+  <script>
+  // Firebase Config (ඔබේ project settings අනුව වෙනස් කරන්න)
+  const firebaseConfig = {
+    apiKey: "AIzaSyCtFFZcpoRQ8hSU93pr6ztzIV04pPR1gp0",
+    authDomain: "kyrexi-6fe93.firebaseapp.com",
+    projectId: "kyrexi-6fe93",
+    appId: "1:161032847442:web:50be7c338b589cc7519f8b",
+    measurementId: "G-0DQ59DKPFL",
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  // UI logic
+  const formArea = document.getElementById('form-area');
+  const tabLogin = document.getElementById('tab-login');
+  const tabRegister = document.getElementById('tab-register');
+  const errorMsg = document.getElementById('errorMsg');
+  const googleBtn = document.getElementById('googleBtn');
+
+  let mode = 'login'; // or 'register'
+
+  // Key for saving only email (NOT password)
+  const savedEmailKey = 'sulaai_saved_email';
+  const savedEmail = localStorage.getItem(savedEmailKey) || '';
+
+  function escapeHtml(s){ return (s+'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  function renderForm() {
+    errorMsg.textContent = '';
+    if(mode === 'login'){
+      formArea.innerHTML = `
+        <div class="field"><input id="email" type="email" placeholder="Email" required value="${escapeHtml(savedEmail)}"></div>
+        <div class="field"><input id="password" type="password" placeholder="Password" required></div>
+        <div class="field"><label class="remember"><input id="rememberMe" type="checkbox"> Remember me</label></div>
+        <button id="primaryBtn" class="btn-primary">Login</button>
+      `;
+    } else {
+      formArea.innerHTML = `
+        <div class="field"><input id="name" type="text" placeholder="Full name" required></div>
+        <div class="field"><input id="email" type="email" placeholder="Email" required></div>
+        <div class="field"><input id="password" type="password" placeholder="Password (min 6 chars)" required></div>
+        <div class="field"><label class="remember"><input id="rememberMe" type="checkbox"> Remember my email</label></div>
+        <button id="primaryBtn" class="btn-primary">Create account</button>
+      `;
+    }
+
+    document.getElementById('primaryBtn').addEventListener('click', onPrimary);
+  }
+
+  function switchTab(toMode){
+    mode = toMode;
+    tabLogin.classList.toggle('active', mode === 'login');
+    tabRegister.classList.toggle('active', mode === 'register');
+    renderForm();
+  }
+
+  tabLogin.addEventListener('click', ()=>switchTab('login'));
+  tabRegister.addEventListener('click', ()=>switchTab('register'));
+
+  async function onPrimary(e){
+    e.preventDefault();
+    errorMsg.textContent = '';
+    errorMsg.style.color = '#ff8a80';
+
+    const emailEl = document.getElementById('email');
+    const pwdEl = document.getElementById('password');
+    const nameEl = document.getElementById('name');
+    const rememberEl = document.getElementById('rememberMe');
+
+    const email = emailEl?.value?.trim();
+    const password = pwdEl?.value;
+
+    if(!email || !password){
+      errorMsg.textContent = 'Please fill all required fields.';
+      return;
+    }
+
+    // Set persistence depending on "remember me"
+    try {
+      const persistence = (rememberEl && rememberEl.checked)
+        ? firebase.auth.Auth.Persistence.LOCAL
+        : firebase.auth.Auth.Persistence.SESSION;
+      await auth.setPersistence(persistence);
+    } catch(pErr){
+      console.warn('setPersistence failed', pErr);
+    }
+
+    try {
+      if(mode === 'login'){
+        const cred = await auth.signInWithEmailAndPassword(email, password);
+
+        // Save only email (if remembered)
+        if(document.getElementById('rememberMe')?.checked){
+          localStorage.setItem(savedEmailKey, email);
+        } else {
+          localStorage.removeItem(savedEmailKey);
+        }
+
+        console.log('Signed in:', cred.user.uid);
+        errorMsg.style.color = '#8ef08e';
+        errorMsg.textContent = 'Login successful!';
+
+        // Redirect to main page
+        setTimeout(() => {
+          window.location.href = "ashiya.html";
+        }, 700);
+
+      } else {
+        // Register flow
+        const name = document.getElementById('name')?.value?.trim() || '';
+        if(password.length < 6){ 
+          errorMsg.textContent = 'Password must be at least 6 characters.'; 
+          return; 
+        }
+
+        const cred = await auth.createUserWithEmailAndPassword(email, password);
+        await cred.user.updateProfile({ displayName: name });
+
+        if(document.getElementById('rememberMe')?.checked){
+          localStorage.setItem(savedEmailKey, email);
+        } else {
+          localStorage.removeItem(savedEmailKey);
+        }
+
+        console.log('Registered:', cred.user.uid);
+        errorMsg.style.color = '#8ef08e';
+        errorMsg.textContent = 'Account created! You are logged in.';
+
+        setTimeout(() => {
+          window.location.href = "sulaai.html";
+        }, 700);
+      }
+    } catch(err){
+      console.error(err);
+      errorMsg.style.color = '#ff8a80';
+      if(err.code === 'auth/user-not-found') errorMsg.textContent = 'No account found for this email.';
+      else if(err.code === 'auth/wrong-password') errorMsg.textContent = 'Incorrect password.';
+      else if(err.code === 'auth/email-already-in-use') errorMsg.textContent = 'Email already in use.';
+      else if(err.code === 'auth/invalid-email') errorMsg.textContent = 'Invalid email address.';
+      else errorMsg.textContent = err.message || 'Authentication failed.';
+    }
+  }
+
+  // Google sign-in
+  googleBtn.addEventListener('click', async () => {
+    errorMsg.textContent = '';
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    // Respect remember checkbox for persistence
+    const rememberEl = document.getElementById('rememberMe');
+    try {
+      const persistence = (rememberEl && rememberEl.checked)
+        ? firebase.auth.Auth.Persistence.LOCAL
+        : firebase.auth.Auth.Persistence.SESSION;
+      await auth.setPersistence(persistence);
+    } catch(e){ /* ignore */ }
+
+    try {
+      const result = await auth.signInWithPopup(provider);
+      console.log('Google sign-in user:', result.user.uid);
+
+      if(document.getElementById('rememberMe')?.checked){
+        localStorage.setItem(savedEmailKey, result.user.email || '');
+      } else {
+        localStorage.removeItem(savedEmailKey);
+      }
+
+      errorMsg.style.color = '#8ef08e';
+      errorMsg.textContent = 'Signed in with Google!';
+      setTimeout(() => {
+        window.location.href = "sulaai.html";
+      }, 700);
+
+    } catch(err){
+      console.error(err);
+      errorMsg.style.color = '#ff8a80';
+      errorMsg.textContent = err.message || 'Google sign-in failed.';
+    }
+  });
+
+  // Initial form
+  renderForm();
+
+  // Observe auth state
+  auth.onAuthStateChanged(user => {
+    if(user){
+      console.log('Auth state: signed in as', user.email, 'uid:', user.uid);
+      // If user is already signed in and still on this page, you can redirect immediately:
+      // (optional: comment out if you don't want immediate redirect)
+      // window.location.href = "ashiya.html";
+    } else {
+      console.log('No user signed in');
+    }
+  });
+  </script>
+</body>
+  </html>
