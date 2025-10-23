@@ -3,43 +3,34 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SULA AI</title>
-<meta name="description" content="Kyrexi Chatbot is your AI assistant for planning events, improving skills, finding the latest news, and writing code. Get answers quickly and accurately!" />
-<meta property="og:title" content="SULA" />
-<meta property="og:description" content="sula aii is designed to help you with everything from event planning to finding the latest web development news, offering personalized assistance for various tasks." />
-<meta property="og:image" content="https://files.catbox.moe/r2qze5.png" />
-<meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Kyrexi" />
-<meta name="twitter:description" content="Get quick help with planning, public speaking, web news, and coding tasks using SULA." />
-<meta name="twitter:image" content="https://i.ibb.co/v4HbGG2C/SulaMd.jpg" />
+<title>SULA AI - Login</title>
+
+<!-- Meta for SEO -->
+<meta name="description" content="SULA AI - Smart assistant powered by Firebase Authentication." />
+<meta property="og:title" content="SULA AI Login" />
+<meta property="og:image" content="https://i.ibb.co/v4HbGG2C/SulaMd.jpg" />
 
 <!-- Google Fonts -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" />
 
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore-compat.js"></script>
+<!-- Firebase SDK (latest compat version) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
 
 <style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     font-family: 'Roboto', sans-serif;
-    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
     background: radial-gradient(circle at center, #001f3f, #000814, #000);
-    background-size: 200% 200%;
     animation: bgMove 12s infinite alternate;
-    padding: 20px;
     color: #00f7ff;
+    padding: 20px;
   }
 
   @keyframes bgMove {
@@ -48,41 +39,39 @@
   }
 
   .container {
-    background: rgba(0, 20, 40, 0.8);
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 0 25px rgba(0, 200, 255, 0.7),
-                0 0 50px rgba(0, 200, 255, 0.5);
-    max-width: 420px;
-    width: 100%;
-    animation: fadeIn 1.2s ease;
+    background: rgba(0, 20, 40, 0.85);
     border: 1px solid rgba(0, 200, 255, 0.4);
+    box-shadow: 0 0 30px rgba(0, 200, 255, 0.7);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 420px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 1.2s ease;
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .logo {
     display: flex;
+    justify-content: center;
     align-items: center;
     margin-bottom: 25px;
-    font-size: 1.8em;
-    font-weight: 700;
-    justify-content: center;
   }
 
   .logo img {
-    width: 65px;
-    height: 65px;
-    margin-right: 12px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     box-shadow: 0 0 20px #00f7ff;
-    animation: pulseBlue 2s infinite;
+    animation: pulse 2s infinite;
   }
 
-  @keyframes pulseBlue {
+  @keyframes pulse {
     0% { box-shadow: 0 0 10px #00f7ff; }
     50% { box-shadow: 0 0 35px #00f7ff; }
     100% { box-shadow: 0 0 10px #00f7ff; }
@@ -94,26 +83,23 @@
     font-size: 2em;
     color: #00eaff;
     text-shadow: 0 0 8px #00f7ff, 0 0 20px #00eaff;
-    animation: flicker 3s infinite;
   }
 
-  @keyframes flicker {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
-    20%, 24%, 55% { opacity: 0.4; }
+  form {
+    display: flex;
+    flex-direction: column;
   }
 
   input {
     width: 100%;
-    padding: 14px 16px;
-    margin-top: 12px;
-    margin-bottom: 18px;
+    padding: 14px;
+    margin: 10px 0;
     border-radius: 10px;
     border: 1px solid rgba(0, 200, 255, 0.6);
+    background: rgba(0, 0, 0, 0.4);
+    color: #00f7ff;
     font-size: 1em;
     outline: none;
-    background: rgba(0,0,0,0.4);
-    color: #00f7ff;
-    transition: 0.3s;
   }
 
   input:focus {
@@ -126,17 +112,14 @@
     padding: 14px;
     margin-top: 10px;
     border-radius: 10px;
-    font-size: 1em;
-    cursor: pointer;
-    font-weight: bold;
-    position: relative;
-    overflow: hidden;
     border: 1px solid #00f7ff;
-    color: #00f7ff;
     background: transparent;
+    color: #00f7ff;
+    font-weight: bold;
+    cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 1px;
-    transition: 0.3s;
+    transition: all 0.3s ease;
   }
 
   button:hover {
@@ -144,50 +127,24 @@
     box-shadow: 0 0 20px #00f7ff, 0 0 40px #00f7ff;
   }
 
-  button::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    transform: scale(0);
-    background: rgba(0,247,255,0.5);
-    width: 100px;
-    height: 100px;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  button:active::after {
-    transform: scale(4);
-    opacity: 1;
-    transition: transform 0.6s, opacity 0.6s;
-  }
-
   .google-btn {
     margin-top: 15px;
-    border: 1px solid #00f7ff;
-    background: rgba(0,0,50,0.6);
-    color: #00f7ff;
-  }
-
-  .google-btn:hover {
-    background: rgba(0,200,255,0.2);
+    background: rgba(0, 0, 50, 0.6);
   }
 
   .error {
     color: #ff4d4f;
     margin-top: 10px;
-    font-size: 0.9em;
     text-align: center;
-    text-shadow: 0 0 5px #ff4d4f, 0 0 15px #ff4d4f;
+    font-size: 0.9em;
   }
 
   .toggle {
-    margin-top: 20px;
     text-align: center;
-    font-size: 0.9em;
+    margin-top: 20px;
     cursor: pointer;
+    font-size: 0.9em;
     color: #00cfff;
-    transition: color 0.3s;
   }
 
   .toggle:hover {
@@ -200,62 +157,58 @@
 </head>
 <body>
 
-<div class="container" id="auth-container">
+<div class="container">
+  <div class="logo">
+    <img src="https://i.ibb.co/v4HbGG2C/SulaMd.jpg" alt="SULA AI" />
+  </div>
+
   <h2 id="form-title">Login</h2>
   <div id="error-msg" class="error"></div>
-  
+
   <!-- Login Form -->
   <form id="login-form">
-    <div class="logo">
-      <img src="https://i.ibb.co/v4HbGG2C/SulaMd.jpg" alt="AI Logo" />
-      <div>SULA AI</div>
-    </div>
     <input type="email" id="login-email" placeholder="Email" required />
     <input type="password" id="login-password" placeholder="Password" required />
-    <button type="submit" id="login-btn">Login</button>
+    <button type="submit">Login</button>
   </form>
-  
+
   <!-- Sign Up Form -->
   <form id="signup-form" class="hidden">
-    <div class="logo">
-      <img src="https://i.ibb.co/v4HbGG2C/SulaMd.jpg" alt="AI Logo" />
-      <div>Kirexi AI</div>
-    </div>
-    <input type="text" id="signup-username" placeholder="Username" required />
-    <input type="text" id="signup-name" placeholder="Name" required />
+    <input type="text" id="signup-name" placeholder="Full Name" required />
     <input type="email" id="signup-email" placeholder="Email" required />
     <input type="password" id="signup-password" placeholder="Password" required />
-    <button type="submit" id="signup-btn">Sign Up</button>
+    <button type="submit">Sign Up</button>
   </form>
-  
+
   <button class="google-btn" id="google-signin">Sign in with Google</button>
   <div class="toggle" id="toggle-auth">Don't have an account? Sign Up</div>
 </div>
 
 <script>
+  // ✅ Firebase Config
   const firebaseConfig = {
     apiKey: "AIzaSyCtFFZcpoRQ8hSU93pr6ztzIV04pPR1gp0",
     authDomain: "kyrexi-6fe93.firebaseapp.com",
     projectId: "kyrexi-6fe93",
-    storageBucket: "kyrexi-6fe93.firebasestorage.app",
+    storageBucket: "kyrexi-6fe93.appspot.com",
     messagingSenderId: "161032847442",
-    appId: "1:161032847442:web:50be7c338b589cc7519f8b",
-    measurementId: "G-0DQ59DKPFL"
+    appId: "1:161032847442:web:50be7c338b589cc7519f8b"
   };
   firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
 
-  const formTitle = document.getElementById('form-title');
   const errorMsg = document.getElementById('error-msg');
-  const toggleLink = document.getElementById('toggle-auth');
+  const formTitle = document.getElementById('form-title');
   const loginForm = document.getElementById('login-form');
   const signupForm = document.getElementById('signup-form');
+  const toggleLink = document.getElementById('toggle-auth');
 
-  let isLoginMode = true;
+  // 🔄 Toggle Forms
+  let isLogin = true;
   toggleLink.addEventListener('click', () => {
-    isLoginMode = !isLoginMode;
+    isLogin = !isLogin;
     errorMsg.textContent = '';
-    if (isLoginMode) {
+    if (isLogin) {
       formTitle.textContent = 'Login';
       loginForm.classList.remove('hidden');
       signupForm.classList.add('hidden');
@@ -268,55 +221,43 @@
     }
   });
 
-  // Login
+  // 🔐 Login
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorMsg.textContent = '';
-    const email = document.getElementById('login-email').value.trim();
-    const password = document.getElementById('login-password').value.trim();
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
     try {
-      const userCredential = await auth.signInWithEmailAndPassword(email, password);
-      const user = userCredential.user;
-      const response = await fetch('/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: user.email, name: user.displayName || user.email })
-      });
-      const data = await response.json();
-      if (data.success) {
-        window.location.href = 'sulaai.html'; // ✅ redirect fixed
-      } else {
-        errorMsg.textContent = 'Authentication failed';
-      }
+      await auth.signInWithEmailAndPassword(email, password);
+      window.location.href = 'sulaai.html';
     } catch (err) {
       errorMsg.textContent = err.message;
     }
   });
 
-  // Signup
+  // 🧾 Sign Up
   signupForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorMsg.textContent = '';
-    const username = document.getElementById('signup-username').value.trim();
-    const name = document.getElementById('signup-name').value.trim();
-    const email = document.getElementById('signup-email').value.trim();
-    const password = document.getElementById('signup-password').value.trim();
+    const name = document.getElementById('signup-name').value;
+    const email = document.getElementById('signup-email').value;
+    const password = document.getElementById('signup-password').value;
     try {
       const userCredential = await auth.createUserWithEmailAndPassword(email, password);
       await userCredential.user.updateProfile({ displayName: name });
-      alert('Account created! You can now log in.');
+      alert('Account created successfully!');
       toggleLink.click();
     } catch (err) {
       errorMsg.textContent = err.message;
     }
   });
 
-  // Google Sign-In
+  // 🔑 Google Sign-In
   document.getElementById('google-signin').addEventListener('click', async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     try {
       await auth.signInWithPopup(provider);
-      window.location.href = 'sulaai.html'; // ✅ Google login redirect
+      window.location.href = 'sulaai.html';
     } catch (err) {
       errorMsg.textContent = err.message;
     }
