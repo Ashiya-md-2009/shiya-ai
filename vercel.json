@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "indica.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/chat",
+      "dest": "/indica.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/indica.js"
+    }
+  ]
+}

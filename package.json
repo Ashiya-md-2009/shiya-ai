@@ -1,0 +1,18 @@
+{
+  "name": "SULA-chat",
+  "version": "1.0.0",
+  "description": "SULA Chatbot",
+  "main": "indica.js",
+  "scripts": {
+    "start": "node indica.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^4.18.2",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
